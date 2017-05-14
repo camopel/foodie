@@ -58,6 +58,9 @@ public class Util {
             e.printStackTrace();
         }
     }
+    public static int getGradeColor(double grade){
+        return getGradeColor((int)grade);
+    }
     public static int getGradeColor(int grade){
         switch (grade){
             case 0: return R.color.grade0;

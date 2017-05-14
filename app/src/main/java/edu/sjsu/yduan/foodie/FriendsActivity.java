@@ -51,12 +51,8 @@ public class FriendsActivity extends AppCompatActivity implements OnMapReadyCall
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Friend selectedRecipe = friendList.get(position);
                 Intent detailIntent = new Intent(context, FriendDetailActivity.class);
                 detailIntent.putExtra("pos",position);
-//                detailIntent.putExtra("mname", selectedRecipe.name);
-//                detailIntent.putExtra("murl", selectedRecipe.image);
-//                detailIntent.putExtra("des", selectedRecipe.Label);
                 startActivity(detailIntent);
             }
         });
@@ -78,20 +74,21 @@ public class FriendsActivity extends AppCompatActivity implements OnMapReadyCall
             double offset_lng = r.nextDouble()*0.04-0.02+lng;
             LatLng ll = new LatLng(offset_lat,offset_lng);
             builder.include(ll);
-            Bitmap bmp = Bitmap.createBitmap(72, 94, Bitmap.Config.ARGB_8888);
+            Bitmap bmp = Bitmap.createBitmap(60, 80, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bmp);
             Paint color = new Paint();
-            color.setTextSize(16);
+            color.setTextSize(46);
             color.setColor(Color.WHITE);
+            color.setStrokeWidth(2);
+            color.setAntiAlias(true);
             canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.marker), 0,0, color);
-            canvas.drawText(String.valueOf(i), 0, 0, color);
+            canvas.drawText(String.valueOf(i), 16, 50, color);
             Marker m = googleMap.addMarker(new MarkerOptions()
                     .position(ll)
                     .title(f.name)
                     .snippet(f.Preference)
                     .draggable(false)
-                    //.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
-                    .icon(BitmapDescriptorFactory.fromBitmap(bmp)));//.anchor(0.5f, 1)
+                    .icon(BitmapDescriptorFactory.fromBitmap(bmp)));
         }
         LatLngBounds bounds = builder.build();
         googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50));

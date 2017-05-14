@@ -15,25 +15,20 @@ import java.util.ArrayList;
 
 class Recommendation {
     public String name, image, distance, discription;
+    public double grade;
     public static ArrayList<Recommendation> getRecipesFromFile(String filename, Context context) {
         final ArrayList<Recommendation> resList = new ArrayList<>();
-
         try {
-            // Load data
             String jsonString = loadJsonFromAsset(filename, context);
             JSONObject json = new JSONObject(jsonString);
             JSONArray rest = json.getJSONArray("restaurants");
-
-            // Get Recipe objects from data
             for(int i = 0; i < rest.length(); i++){
                 Recommendation res = new Recommendation();
-
                 res.name = rest.getJSONObject(i).getString("name");
                 res.image = rest.getJSONObject(i).getString("image");
                 res.distance = rest.getJSONObject(i).getString("Distance");
                 res.discription = rest.getJSONObject(i).getString("Discription");
-
-
+                res.grade = rest.getJSONObject(i).getDouble("Rank");
                 resList.add(res);
             }
         } catch (JSONException e) {
@@ -58,7 +53,6 @@ class Recommendation {
             ex.printStackTrace();
             return null;
         }
-
         return json;
     }
 }

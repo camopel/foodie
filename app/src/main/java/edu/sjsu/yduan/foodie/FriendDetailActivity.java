@@ -11,8 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
+import com.facebook.share.widget.LikeView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -62,10 +61,8 @@ public class FriendDetailActivity extends AppCompatActivity {
         ImageView profile = (ImageView) findViewById(R.id.profile);
         Picasso.with(this)
                 .load(f.image)
-                .resize(125, 125)
                 .transform(new CircleTransform())
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .resize(120, 120)
                 .into(profile);
         preference_layout = (FlowLayout)findViewById(R.id.preference_layout);
         String[] sp = f.Preference.split(",");
@@ -88,12 +85,11 @@ public class FriendDetailActivity extends AppCompatActivity {
                 }
             }
         });
-//        description = (TextView) findViewById(R.id.description);
-//        label1 = (TextView) findViewById(R.id.label1);
-//        label2 = (TextView) findViewById(R.id.label2);
-//        label3 = (TextView) findViewById(R.id.label3);
-//        label4 = (TextView) findViewById(R.id.label4);
-//        loadHomePage();
+        LikeView likeView = (LikeView) findViewById(R.id.like_view);
+        String page=getString(R.string.facebook)+"103817216861013";//da wang
+        likeView.setObjectIdAndType(page, LikeView.ObjectType.PAGE);
+        likeView.setLikeViewStyle(LikeView.Style.BUTTON);
+
     }
     private void addPreferenceItem(String content,int value){
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

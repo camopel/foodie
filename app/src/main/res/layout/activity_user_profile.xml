@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/profile"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_centerVertical="false"
@@ -40,9 +40,23 @@
             android:id="@+id/biz_fav"
             android:layout_width="36dp"
             android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/padding4dp"
             android:layout_marginRight="@dimen/padding4dp"
             android:src="@drawable/ic_fav_gray" />
+
+        <com.facebook.share.widget.LikeView
+            android:id="@+id/like_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/profile"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/price_left_margin"/>
+
     </RelativeLayout>
 
     <TextView
