@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#d94520</color>
+    <color name="colorPrimaryDark">#c93500</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="gold">#CC9900</color>
+    <color name="text">#4f5a5e</color>
+    <color name="light_text">#4e595d</color>
+    <color name="verylight_text">#959b9e</color>
+    <color name="grade10">#00abb5</color>
+    <color name="grade9">#00B551</color>
+    <color name="grade8">#73CF42</color>
+    <color name="grade7">#C5DE35</color>
+    <color name="grade6">#FFC800</color>
+    <color name="grade5">#FF9600</color>
+    <color name="grade4">#FF6701</color>
+    <color name="grade3">#CB2201</color>
+    <color name="grade2">#7E0100</color>
+    <color name="grade1">#4F0000</color>
+    <color name="grade0">#000000</color>
+	<color name="colorLowCarb">#6495ed</color>
+    <color name="colorBalanced">#ffd700</color>
+    <color name="colorMediumCarb">#D2527F</color>
+    <color name="colorLowSodium">#F4D03F</color>
+    <color name="colorLowFat">#F2784B</color>
+    <color name="colorVegetarian">#26A65B</color>
+    <color name = "Suchi">#6495ed</color>color>
+    <color name = "Mexico">#ffd700</color>color>
+    <color name = "Chinese">#ffb6c1</color>color>
+    <color name = "India">#ffa500</color>color>
+    <color name = "Greece">#afeeee</color>color>
+    <color name = "Englian">#dda0dd</color>color>
+    <color name = "Italy">#66cdaa</color>color>
+    <color name = "El_Salvador">#fa8072</color>color>
+</resources>

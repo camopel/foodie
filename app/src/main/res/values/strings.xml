@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Foodie</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">685064651700688</string>
+    <string name="fb_login_protocol_scheme">685064651700688</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_in">Sign in with Facebook</string>
+    <string name="desc_firebase_lockup">Firebase logo and name</string>
+    <string name="facebook_title_text">Facebook Login</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="loading">Loading…</string>
+    <string name="facebook_status_fmt">Facebook User: %s</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="pub_permission">publish_actions</string>
+    <string name="yelp_id">1Osdg4h9Rn72c2EZq2I2tA</string>
+    <string name="yelp_Secret">PkhdI3Cr70uSyCtv04w7YUDK1m6P4bZcDW3HdZTwviXP3eqAgnFTb19Z7c0PqnhX</string>
+    <string name="welcome">Welcome to Foodie</string>
+    <string name="logo">Logo</string>
+    <string name="unknow">Uknown</string>
+    <string name="unknow_email">uknown@foodie.com</string>
+    <string name="person">person</string>
+    <string name="share">ShareKey</string>
+    <string name="search_restaurant">Search Restaurant</string>
+    <string name="search">Search</string>
+    <string name="location_key">LOCATION_KEY</string>
+    <string name="last_updated_time">LAST_UPDATED_TIME_STRING_KEY</string>
+    <string name="google_map_key">AIzaSyDtsQ-RCWCmuDlNUJkQ7TIcAmPubWl-sLU</string>
+    <string name="businesses_intent_key">businesses</string>
+    <string name="n_a">N/A</string>
+    <string name="img">img</string>
+    <string name="miles">miles</string>
+    <string name="money_label">$</string>
+    <string name="facebook">https://www.facebook.com/</string>
+    <string name="reviews_title">Reviews</string>
+    <string name="preference">Taste Preference</string>
+    <string name="friends">Followed Friends</string>
+    <string name="restaurant">Favorite Restaurants</string>
+    <string name="descript_the_preferencence_in_a_few_words">Descript the preferencence in a few words</string>
+    <string name="done">Done</string>
+    <string name="textview">TextView</string>
+
+	<string name="thumbnail">thumbnail</string>
+    <string name="abouts">Foodie is an awesome app for searching favorite food and making new foodie friends</string>
+</resources>

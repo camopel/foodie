@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/com_facebook_auth_dialog_corner_radius_oversized">
+
+        <ImageView
+            android:id="@+id/biz_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/padding4dp"
+            android:layout_marginRight="@dimen/padding4dp"
+            android:contentDescription="@string/img"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/biz_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/padding4dp"
+            android:layout_toEndOf="@id/biz_img"
+            android:layout_toRightOf="@id/biz_img"
+            android:gravity="start"
+            android:lines="1"
+            android:text="@string/n_a"
+            android:textAlignment="textStart"
+            android:textColor="@color/text"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/biz_score"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="false"
+            android:layout_below="@+id/biz_category"
+            android:layout_centerInParent="false"
+            android:layout_marginEnd="@dimen/padding8dp"
+            android:layout_marginRight="@dimen/padding8dp"
+            android:background="@drawable/round_rate"
+            android:gravity="center_vertical|center_horizontal"
+            android:textAlignment="gravity"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/biz_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/biz_name"
+            android:layout_marginBottom="@dimen/cardview_default_elevation"
+            android:layout_toEndOf="@+id/biz_img"
+            android:layout_toRightOf="@+id/biz_img"
+            android:lines="1"
+            android:text="@string/n_a"
+            android:textColor="@color/verylight_text"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/biz_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/biz_category"
+            android:drawableStart="@drawable/location"
+            android:layout_toEndOf="@+id/biz_img"
+            android:layout_toRightOf="@+id/biz_img"
+            android:drawableLeft="@drawable/location"
+            android:drawablePadding="@dimen/padding2dp"
+            android:gravity="start|center_vertical"
+            android:text="@string/n_a"
+            android:textAlignment="gravity"
+            android:textColor="@color/verylight_text"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/biz_miles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/biz_category"
+            android:layout_toEndOf="@+id/biz_distance"
+            android:layout_toRightOf="@+id/biz_distance"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/miles"
+            android:textAlignment="gravity"
+            android:textColor="@color/verylight_text"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/biz_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="false"
+            android:layout_below="@id/biz_category"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_marginStart="@dimen/padding8dp"
+            android:layout_marginLeft="@dimen/padding8dp"
+            android:layout_toEndOf="@+id/biz_miles"
+            android:layout_toRightOf="@+id/biz_miles"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/money_label"
+            android:textAlignment="gravity"
+            android:textColor="@color/gold"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/biz_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/biz_distance"
+            android:layout_toEndOf="@+id/biz_img"
+            android:layout_toRightOf="@+id/biz_img"
+            android:drawableLeft="@drawable/like"
+            android:drawablePadding="@dimen/padding2dp"
+            android:drawableStart="@drawable/like"
+            android:gravity="start|center_vertical"
+            android:text="@string/n_a"
+            android:textAlignment="gravity"
+            android:textColor="@color/verylight_text"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/biz_reviewcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/biz_distance"
+            android:layout_marginLeft="@dimen/padding8dp"
+            android:layout_marginStart="@dimen/padding8dp"
+            android:layout_toEndOf="@+id/biz_like"
+            android:layout_toRightOf="@+id/biz_like"
+            android:drawableStart="@drawable/yelp_review"
+            android:drawableLeft="@drawable/yelp_review"
+            android:drawablePadding="@dimen/padding2dp"
+            android:gravity="start|center_vertical"
+            android:text="@string/n_a"
+            android:textAlignment="center"
+            android:textColor="@color/verylight_text"
+            android:textSize="16sp" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

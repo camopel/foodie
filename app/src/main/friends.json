@@ -1,0 +1,97 @@
+{
+  "friends": [
+    {
+      "name": "Max",
+      "image" : "http://admissions.berkeley.edu/sites/default/files/UCB_landingpage_images_600x300_212.jpg",
+      "Preference": "Mexico, Italy, El Salvador",
+      "Distance": "1 mi",
+      "dietLabel": "non-vegetarian"
+    },
+
+    {
+      "name": "Alex",
+      "image" : "http://godlikediscipline.com/wp-content/uploads/2015/09/2373034-laura-vanderkam-profile1.jpg",
+      "Preference": "India, Kosovo",
+      "Distance": "2 mi",
+      "dietLabel": "Vegetarian"
+    },
+
+    {
+      "name": "Tom",
+      "image" : "https://www.cheme.cornell.edu/engineering/customcf/iws_ai_faculty_display/ai_images/ads10-profile.jpg",
+      "Preference": "Greece, Englian",
+      "Distance": "2 mi",
+      "dietLabel": "non-vegetarian"
+    },
+    {
+      "name": "Bally",
+      "image" : "http://i.dailymail.co.uk/i/pix/2010/12/06/article-1336035-07988498000005DC-505_196x206.jpg",
+      "Preference": "Mexico, Italy, El Salvador",
+      "Distance": "3 mi",
+      "dietLabel": "non-vegetarian"
+    },
+
+    {
+      "name": "Fox",
+      "image" : "https://www.fotkaplus.co.uk/wp-content/uploads/2016/04/carousel-profile-2.jpg",
+      "Preference": "Mexico, Italy, El Salvador",
+      "Distance": "4 mi",
+      "dietLabel": "Vegetarian"
+    },
+
+    {
+      "name": "Jim",
+      "image" : "https://3.bp.blogspot.com/-00Y6RJZf5_8/VrJGrN3KTTI/AAAAAAAAC2o/j_dyJGLgXjM/s320/whatsapp-group-profile-picture-.jpg",
+      "Preference": "Mexico, Italy, El Salvador",
+      "Distance": "4 mi",
+      "dietLabel": "non-vegetarian"
+    },
+
+    {
+      "name": "Kate",
+      "image" : "http://www.juliacleanasawhistle.com/89792356.jpg",
+      "Preference": "Mexico, Italy, El Salvador",
+      "Distance": "4 mi",
+      "dietLabel": "Vegetarian"
+    }
+  ],
+  "restaurants": [
+    {
+      "name": "Panda Express",
+      "image" : "http://imgur.com/04bVzUV.jpg",
+      "Distance":"4 mi",
+      "Discription" : "\"Panda Express is a Chinese food.\"",
+      "Rank":3.5
+    },
+
+    {
+      "name": "Korea BBQ",
+      "image" : "http://imgur.com/6vIDmHK.jpg",
+      "Distance":"8 mi",
+      "Discription" : "\"I like the Korea beef here...\"",
+      "Rank":3
+    },
+    {
+      "name": "Red Robin",
+      "image" : "http://imgur.com/8PMiBQP.jpg",
+      "Distance":"5 mi",
+      "Discription" : "\"Best burger I ever eat! \"",
+      "Rank":4
+    },
+
+    {
+      "name": "Hot pot",
+      "image" : "http://imgur.com/pjP4kVD.jpg",
+      "Distance":"8 mi",
+      "Discription" : "\"Spicy, Hot, Delicious...\"",
+      "Rank":5
+    },
+    {
+      "name": "Pizza",
+      "image" : "http://imgur.com/v0Qel68.jpg",
+      "Distance":"8 mi",
+      "Discription" : "\"My favourite pizza!!!\"",
+      "Rank":2
+    }
+  ]
+}
