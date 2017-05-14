@@ -20,19 +20,61 @@ import java.util.ArrayList;
  * Created by yduan on 5/10/2017.
  */
 public class FacebookProxy {
-    private ArrayList<FacebookUser> PageLikedFBUser=new ArrayList<>();
-    private ArrayList<BusinessAIO> ALBA=new ArrayList<>();
+    private ArrayList<FacebookUser> PageLikedFBUser;
+    private ArrayList<BusinessAIO> ALBA;
     private FacebookEvent fbEvent;
-    private FacebookProxy(){}
+    public FacebookUser user;
+    private FacebookProxy(){
+        ALBA=new ArrayList<>();
+        PageLikedFBUser=new ArrayList<>();
+    }
     private static FacebookProxy instance = null;
+    public void GetUserProfile(){
+        if(fbEvent==null) return;
+        if(user!=null || AccessToken.getCurrentAccessToken()==null) {
+            fbEvent.onProfileComplete(user);
+            return;
+        }
+        user=new FacebookUser();
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "name,id,picture.type(large){url},email");
+        new GraphRequest(
+                AccessToken.getCurrentAccessToken(),
+                "/me",
+                parameters,
+                HttpMethod.GET,
+                new GraphRequest.Callback() {
+                    public void onCompleted(GraphResponse response) {
+                        if(response.getError()==null) {
+                            try{
+                                JSONObject resp = response.getJSONObject();
+                                user.setName(resp.getString("name"));
+                                user.setID(resp.getString("id"));
+                                user.setEmail(resp.getString("email"));
+                                user.setImgUrl(resp.getJSONObject("picture").getJSONObject("data").getString("url"));
+                                fbEvent.onProfileComplete(user);
+                            }catch (Exception ex){
+                                ex.printStackTrace();
+                            }
+                        }
+                    }
+                }
+        ).executeAsync();
+    }
     public static FacebookProxy getInstance() {
         if(instance == null)  instance = new FacebookProxy();
         return instance;
     }
     public static void close() {
-//        if(instance.FriendsLikeThisPage!=null) instance.FriendsLikeThisPage.clear();
-        if(instance.ALBA!=null) instance.ALBA.clear();
-        instance=null;
+        if(instance!=null) {
+            instance.ALBA.clear();
+            instance.ALBA=null;
+            instance.user=null;
+            instance.PageLikedFBUser.clear();
+            instance.PageLikedFBUser=null;
+            instance=null;
+        }
+
     }
     public void SetEvent(FacebookEvent e){
         this.fbEvent = e;

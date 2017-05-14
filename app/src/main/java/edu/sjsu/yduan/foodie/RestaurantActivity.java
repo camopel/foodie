@@ -37,7 +37,7 @@ public class RestaurantActivity extends AppCompatActivity implements BusinessEve
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_detail);
-
+        setTitle("Restaurant Detail");
         Intent intent = getIntent();
         fPageID=intent.getStringExtra("fpageid");
         business=(Business) intent.getSerializableExtra("biz");
@@ -138,7 +138,7 @@ public class RestaurantActivity extends AppCompatActivity implements BusinessEve
         }
 
     }
-
+    public void onProfileComplete(FacebookUser fu){}
     public void onYelpBusinessComplete(Business business){
         ArrayList<String> photos = business.getPhotos();
         int size = 110;

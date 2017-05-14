@@ -12,6 +12,7 @@
     <string name="signed_out">Signed Out</string>
     <string name="loading">Loading…</string>
     <string name="facebook_status_fmt">Facebook User: %s</string>
+    <string name="facebook_id_fmt">Facebook ID: %s</string>
     <string name="firebase_status_fmt">Firebase User: %s</string>
     <string name="pub_permission">publish_actions</string>
     <string name="yelp_id">1Osdg4h9Rn72c2EZq2I2tA</string>
@@ -40,10 +41,7 @@
     <string name="descript_the_preferencence_in_a_few_words">Descript the preferencence in a few words</string>
     <string name="done">Done</string>
     <string name="textview">TextView</string>
-
     <string name="thumbnail">thumbnail</string>
-    <string name="abouts">Foodie is an awesome app for searching favorite food and making new foodie friends</string>
+    <string name="abouts">Foodie is an awesome app for searching favorite food and making foodie friends</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

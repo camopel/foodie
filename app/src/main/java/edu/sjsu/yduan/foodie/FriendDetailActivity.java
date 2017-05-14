@@ -22,21 +22,6 @@ import java.util.Random;
  */
 
 public class FriendDetailActivity extends AppCompatActivity {
-//    private ImageView profile;
-//    private TextView name;//, description,label1,label2,label3,label4;
-//    private Context context;
-//    private String murl,mname,des;
-//    public static final HashMap<String, Integer> LABEL_COLORS = new HashMap<String, Integer>()
-//    {{
-//        put("Suchi", R.color.Suchi);
-//        put("Mexico", R.color.Mexico);
-//        put("Chinese", R.color.Chinese);
-//        put("India", R.color.India);
-//        put("Greece", R.color.Greece);
-//        put("Englian", R.color.Englian);
-//        put("Italy",R.color.Italy);
-//        put("El_Salvador", R.color.El_Salvador);
-//    }};
 
     private FlowLayout preference_layout;
     @Override
@@ -52,17 +37,13 @@ public class FriendDetailActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         int pos = getIntent().getExtras().getInt("pos");
         Friend f = friendList.get(pos);
-//        murl = this.getIntent().getExtras().getString("murl");
-//        des = this.getIntent().getExtras().getString("des");
-//        mname = this.getIntent().getExtras().getString("mname");
-
+        setTitle(f.name+"'s Detail");
         TextView name = (TextView) findViewById(R.id.name);
         name.setText(f.name);
         ImageView profile = (ImageView) findViewById(R.id.profile);
         Picasso.with(this)
                 .load(f.image)
                 .transform(new CircleTransform())
-                .resize(120, 120)
                 .into(profile);
         preference_layout = (FlowLayout)findViewById(R.id.preference_layout);
         String[] sp = f.Preference.split(",");

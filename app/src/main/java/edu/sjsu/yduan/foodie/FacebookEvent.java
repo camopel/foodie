@@ -10,4 +10,5 @@ public interface FacebookEvent {
     void onSearchPageComplete(ArrayList<BusinessAIO> alba);
     void onMyFriendsComplate();
     void onPageLikedFriendsComplate(ArrayList<FacebookUser> alfu);
+    void onProfileComplete(FacebookUser fu);
 }

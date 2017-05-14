@@ -15,6 +15,7 @@ public class NewPreferenceActivity extends ProgressActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newpreference);
+        setTitle("New Preference");
         ratingBar = (RatingBar)findViewById(R.id.ratingBar);
         newpref = (EditText)findViewById(R.id.newpref);
         btn = (Button)findViewById(R.id.donebtn);

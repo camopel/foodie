@@ -40,6 +40,7 @@ public class FriendsActivity extends AppCompatActivity implements OnMapReadyCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(edu.sjsu.yduan.foodie.R.layout.activity_friend);
+        setTitle("Nearby Friends");
         final Context context = this;
         Intent i = getIntent();
         lng = i.getDoubleExtra("lng",0);

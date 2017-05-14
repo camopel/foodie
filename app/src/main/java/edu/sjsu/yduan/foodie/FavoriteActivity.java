@@ -34,6 +34,7 @@ public class FavoriteActivity extends ProgressActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
+        setTitle("Favorite");
         preference_layout = (FlowLayout)findViewById(R.id.preference_layout);
         friend_layout = (LinearLayout)findViewById(R.id.friends_layout);
         restaurant_layout = (LinearLayout)findViewById(R.id.restaurant_layout);

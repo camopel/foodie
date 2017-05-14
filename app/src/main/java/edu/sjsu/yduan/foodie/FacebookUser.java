@@ -30,4 +30,12 @@ public class FacebookUser implements Serializable {
         this.Name = s;
     }
     String Name;
+
+    public String getEmail() {
+        return this.Email;
+    }
+    public void setEmail(String s) {
+        this.Email = s;
+    }
+    String Email;
 }

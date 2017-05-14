@@ -66,19 +66,19 @@ public class BusinessProxy {
     }
 
     public void SearchBusiness(double latitude, double longtitude){
-        SearchBusiness(latitude, longtitude,"",0,"distance");
+        SearchBusiness(latitude, longtitude,"",0,"distance",true);
     }
     public void SearchBusiness(double latitude, double longtitude,String term){
-        SearchBusiness(latitude, longtitude,term,0,"rating");
+        SearchBusiness(latitude, longtitude,term,0,"best_match",false);
     }
-    public void SearchBusiness(double latitude, double longtitude,String term,int offset,String sortby){
+    public void SearchBusiness(double latitude, double longtitude,String term,int offset,String sortby,boolean openNow){
         Map<String, String> params = new HashMap<>();
         params.put("categories", "restaurants");
         params.put("latitude", String.valueOf(latitude));//"40.581140"
         params.put("longitude", String.valueOf(longtitude));//"-111.914184"
         params.put("limit", "10");
         params.put("sort_by", sortby);
-        params.put("open_now", "true");
+        if(openNow) params.put("open_now", "true");
         params.put("term",term);
 //        params.put("radius","40000");
         params.put("offset",String.valueOf(offset));

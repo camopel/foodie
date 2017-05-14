@@ -3,10 +3,10 @@ package edu.sjsu.yduan.foodie;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,6 +14,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,8 +23,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.net.Uri;
-import android.support.v7.app.AlertDialog;
+
+import com.facebook.AccessToken;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
@@ -36,7 +37,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 import com.yelp.fusion.client.models.Business;
 import com.yelp.fusion.client.models.Reviews;
@@ -50,7 +50,7 @@ public class MainActivity extends ProgressActivity implements NavigationView.OnN
         OnConnectionFailedListener{
 
     private TextView uname;
-    private TextView uemail;
+//    private TextView uemail;
     private ImageView uimg;
     private EditText searchtext;
     private boolean YelpProxyConnected = false;
@@ -69,7 +69,7 @@ public class MainActivity extends ProgressActivity implements NavigationView.OnN
     private LocationListener locationListener;
 //    private boolean reqSearch=false;
     private FacebookProxy fbProxy;
-//    private int searchMode=0;
+    private int searchMode=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +88,7 @@ public class MainActivity extends ProgressActivity implements NavigationView.OnN
 
         View header = navigationView.getHeaderView(0);
         uname = (TextView) header.findViewById(R.id.header_uname);
-        uemail = (TextView) header.findViewById(R.id.header_uemail);
+//        uemail = (TextView) header.findViewById(R.id.header_uemail);
         uimg = (ImageView) header.findViewById(R.id.header_uimg);
 
         ImageButton searchbtn = (ImageButton) findViewById(R.id.searchButton);
@@ -111,7 +111,6 @@ public class MainActivity extends ProgressActivity implements NavigationView.OnN
         BizProxy.SetEvent(this);
         BizProxy.SetupProxy();
         fbProxy = FacebookProxy.getInstance();
-        fbProxy.SetEvent(this);
     }
 
     @Override
@@ -199,9 +198,17 @@ public class MainActivity extends ProgressActivity implements NavigationView.OnN
     @Override
     protected void onResume() {
         super.onResume();
-        updateMyInfo();
         if (mGoogleApiClient.isConnected()) startLocationUpdates();
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null) fbProxy.GetMyFriends(null);
+//        if(FirebaseAuth.getInstance().getCurrentUser()!=null)
+        if(AccessToken.getCurrentAccessToken()!=null) {
+            fbProxy.SetEvent(this);
+            fbProxy.GetUserProfile();
+            fbProxy.GetMyFriends(null);
+        }
+        else {
+            updateMyInfo(null);
+            FBFriendsUpdated=true;
+        }
         searchtext.setText(null);
     }
 
@@ -229,17 +236,17 @@ public class MainActivity extends ProgressActivity implements NavigationView.OnN
         }
     }
 
-    private void updateMyInfo() {
-        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.share), MODE_PRIVATE);
-        String nm = sharedPref.getString("uname", getString(R.string.unknow));
-        String eml = sharedPref.getString("ueml", getString(R.string.unknow_email));
-        uname.setText(nm);
-        uemail.setText(eml);
-        String url = sharedPref.getString("uimgurl", null);
-        if (url != null) Picasso.with(uimg.getContext()).load(url).into(uimg);
-        else {
+    private void updateMyInfo(FacebookUser fu){
+        if(fu==null){
+            uname.setText(getString(R.string.unknow));
+//            uemail.setText(getString(R.string.unknow_email));
             Drawable icon = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_person_white, null);
             uimg.setImageDrawable(icon);
+        }
+        else{
+            uname.setText(fu.getName());
+//            uemail.setText(fu.getEmail());
+            Picasso.with(uimg.getContext()).load(fu.getImgUrl()).resize(125,125).into(uimg);
         }
     }
 
@@ -335,7 +342,12 @@ public class MainActivity extends ProgressActivity implements NavigationView.OnN
             toastLongMessage("No Match Result!");
             searchtext.setText(null);
         }
-        else fbProxy.SearchPage(businesses);
+        else if(fbProxy.user!=null) fbProxy.SearchPage(businesses);
+        else {
+            hideProgressDialog();
+            searchtext.setText(null);
+            toastLongMessage("Login First!");
+        }
     }
     public void onYelpProxyError(int err){
         hideProgressDialog();
@@ -349,13 +361,16 @@ public class MainActivity extends ProgressActivity implements NavigationView.OnN
     public void onClick(View v){
         if(YelpProxyConnected){
             showProgressDialog();
-            if(v!=null)
+            if(v!=null){
+                searchMode=1;
                 BizProxy.SearchBusiness(mCurrentLocation.getLatitude(),mCurrentLocation.getLongitude(),searchtext.getText().toString());
-            else
-                BizProxy.SearchBusiness(mCurrentLocation.getLatitude(),mCurrentLocation.getLongitude());
+            }else {
+                searchMode=0;
+                BizProxy.SearchBusiness(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
 //            startLocationUpdates();
 //            searchMode=(v!=null)?1:0;
 //            reqSearch=true;
+            }
         }else{
             toastMessage("Yelp proxy fail to setup. Retry later!");
             BizProxy.SetupProxy();
@@ -365,6 +380,7 @@ public class MainActivity extends ProgressActivity implements NavigationView.OnN
         hideProgressDialog();
         Intent it = new Intent(this, BusinessListViewActivity.class);
         it.putExtra(getString(R.string.businesses_intent_key), alba);
+        it.putExtra("mode",searchMode);
         startActivity(it);
     }
     public void onMyFriendsComplate(){
@@ -375,4 +391,7 @@ public class MainActivity extends ProgressActivity implements NavigationView.OnN
         if(YelpProxyConnected)hideProgressDialog();
     }
     public void onPageLikedFriendsComplate(ArrayList<FacebookUser> alfu){}
+    public void onProfileComplete(FacebookUser fu){
+        updateMyInfo(fu);
+    }
 }
