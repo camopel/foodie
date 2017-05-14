@@ -15,12 +15,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -30,19 +28,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by xiaoyuliang on 5/12/17.
- */
-
 public class FriendsActivity extends AppCompatActivity implements OnMapReadyCallback {
-
     ListView mListView;
-    MapView mapView;
     GoogleMap googleMap;
     LatLngBounds.Builder builder;
     final int MY_PERMISSION_LOCATION = 10;
     ArrayList<Friend> friendList;
-    CameraUpdate cameraUpdate;
     double lng;
     double lat;
     @Override
@@ -58,7 +49,6 @@ public class FriendsActivity extends AppCompatActivity implements OnMapReadyCall
         mListView = (ListView) findViewById(R.id.friends_list_view);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Friend selectedRecipe = friendList.get(position);
@@ -69,44 +59,16 @@ public class FriendsActivity extends AppCompatActivity implements OnMapReadyCall
 //                detailIntent.putExtra("des", selectedRecipe.Label);
                 startActivity(detailIntent);
             }
-
         });
-        mapView = (MapView)findViewById(R.id.mapView);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (mapView != null) {
-            mapView.getMapAsync(this);
-        }
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
     @Override
     public void onMapReady(GoogleMap gMap) {
         this.googleMap = gMap;
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+
         builder = new LatLngBounds.Builder();
         Random r = new Random();
         int i=0;
@@ -116,44 +78,32 @@ public class FriendsActivity extends AppCompatActivity implements OnMapReadyCall
             double offset_lng = r.nextDouble()*0.04-0.02+lng;
             LatLng ll = new LatLng(offset_lat,offset_lng);
             builder.include(ll);
-            Bitmap bmp = Bitmap.createBitmap(36, 47, Bitmap.Config.ARGB_8888);
+            Bitmap bmp = Bitmap.createBitmap(72, 94, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bmp);
             Paint color = new Paint();
-            color.setTextSize(12);
+            color.setTextSize(16);
             color.setColor(Color.WHITE);
             canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.marker), 0,0, color);
-            canvas.drawText(String.valueOf(i), 7, 18, color);
+            canvas.drawText(String.valueOf(i), 0, 0, color);
             Marker m = googleMap.addMarker(new MarkerOptions()
                     .position(ll)
                     .title(f.name)
                     .snippet(f.Preference)
                     .draggable(false)
+                    //.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
                     .icon(BitmapDescriptorFactory.fromBitmap(bmp)));//.anchor(0.5f, 1)
         }
-        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
         LatLngBounds bounds = builder.build();
-        cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 200);
-        showMap();
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50));
+        showMyLocation();
     }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == MY_PERMISSION_LOCATION && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            showMap();
-        }
-    }
-    private void showMap(){
+
+    private void showMyLocation(){
         int c1 = ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
         int c2 = ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION);
         int c3 = PackageManager.PERMISSION_GRANTED;
-        if (c1 != c3 || c2 != c3) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
-                    MY_PERMISSION_LOCATION);
-            return;
+        if (c1 == c3 && c2 == c3) {
+            googleMap.setMyLocationEnabled(true);
         }
-        googleMap.setMyLocationEnabled(true);
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
-        MapsInitializer.initialize(this);
-        googleMap.moveCamera(cameraUpdate);
     }
 }
